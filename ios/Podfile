@@ -1,0 +1,32 @@
+platform :ios, '12.0'
+
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+ENV['YANDEX_MAPKIT_VARIANT'] = 'full'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+install! 'cocoapods', :disable_input_output_paths => true
+
+target 'Runner' do
+  use_frameworks!
+
+  pod 'YandexMapsMobile', '~> 4.2.2-lite'
+
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+
+    target.build_configurations.each do |config|
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      end
+     end
+   end
+
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+
+end
