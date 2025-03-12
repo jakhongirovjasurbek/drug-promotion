@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:drugpromotion/core/enums/loading_status.dart';
-import 'package:drugpromotion/core/helpers/storage_repository.dart';
 import 'package:drugpromotion/core/repositories/login.dart';
 import 'package:drugpromotion/screens/login/args/args.dart';
 import 'package:equatable/equatable.dart';
@@ -28,10 +27,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           ));
         },
         (token) {
-          StorageRepository.putString('access_token', token);
-
           emit(state.copyWith(
             status: LoadingStatus.loadSuccess,
+            token: token,
           ));
         },
       );

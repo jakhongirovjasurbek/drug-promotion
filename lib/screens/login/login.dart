@@ -2,6 +2,7 @@ import 'package:drugpromotion/assets/assets.dart';
 import 'package:drugpromotion/core/bloc/authentication/authentication_bloc.dart';
 import 'package:drugpromotion/core/bloc/login/login_bloc.dart';
 import 'package:drugpromotion/core/enums/auth_status.dart';
+import 'package:drugpromotion/core/helpers/storage_repository.dart';
 import 'package:drugpromotion/core/repositories/login.dart';
 import 'package:drugpromotion/core/routes/route_names.dart';
 import 'package:drugpromotion/core/widgets/button/button.dart';
@@ -32,8 +33,10 @@ class _LoginPageState extends State<LoginPage> {
       child: MultiBlocListener(
         listeners: [
           BlocListener<LoginBloc, LoginState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state.status.isLoadSuccess) {
+                await StorageRepository.putString('access_token', state.token!);
+
                 context.read<AuthenticationBloc>().add(
                       AuthenticationStatusChanged(
                         status: AuthenticationStatus.authenticated,
