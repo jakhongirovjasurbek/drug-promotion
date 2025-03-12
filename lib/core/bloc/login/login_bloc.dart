@@ -27,8 +27,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             error: failure.message,
           ));
         },
-        (token) async {
-          await StorageRepository.putString('access_token', token);
+        (token) {
+          StorageRepository.putString('access_token', token);
 
           emit(state.copyWith(
             status: LoadingStatus.loadSuccess,

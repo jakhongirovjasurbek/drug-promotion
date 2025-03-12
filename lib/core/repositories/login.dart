@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:drugpromotion/core/dio/dio.dart';
 import 'package:drugpromotion/core/failure/failure.dart';
@@ -19,9 +21,9 @@ final class LoginRepository {
         },
       );
 
-      print('This is token: ${response.data}');
+      final token = jsonDecode(response.data)['token'];
 
-      return response.data['token'];
+      return token;
     });
   }
 }

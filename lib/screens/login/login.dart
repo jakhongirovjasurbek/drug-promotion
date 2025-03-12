@@ -99,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                     WTextFormField(
                       controller: passwordController,
                       label: AppLocalization.current.password,
+                      suffix: Icon(Icons.remove_red_eye),
                       validator: (value) {
                         return null;
                       },

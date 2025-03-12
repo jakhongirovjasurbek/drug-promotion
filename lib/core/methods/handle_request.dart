@@ -23,7 +23,9 @@ Future<Either<ServerFailure, T>> handleRequest<T>(
     print('Error response: ${error.response}');
 
     return Left(ServerFailure(message: error.message ?? ''));
-  } catch (error) {
+  } catch (error, stacktrace) {
+    print('Error: $error, stacktrace: $stacktrace');
+
     return Left(ServerFailure(message: '$error'));
   }
 }
