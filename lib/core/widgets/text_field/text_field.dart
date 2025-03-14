@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 part 'enums.dart';
+
 part 'mixins.dart';
 
 /// A customizable text input field with additional options like prefix icon,
@@ -89,6 +90,8 @@ class WTextFormField extends StatefulWidget {
 
   final TextStyle? hintStyle;
 
+  final bool? obscure;
+
   /// Constructor for the TextFormFieldX widget.
   const WTextFormField({
     super.key,
@@ -124,6 +127,7 @@ class WTextFormField extends StatefulWidget {
     this.disabledBorderColor,
     this.error,
     this.hintStyle,
+    this.obscure,
   }) : assert(
           !hasClearText || controller != null,
           'If hasClearText is true, controller must not be null',
@@ -195,6 +199,7 @@ class _WTextFormFieldState extends State<WTextFormField>
       inputFormatters: widget.inputFormatters,
       keyboardType: widget.keyboardType,
       autofocus: widget.autoFocus,
+      obscureText: widget.obscure ?? false,
       textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
       autovalidateMode: widget.autoValidateMode,
       textAlignVertical: TextAlignVertical.center,

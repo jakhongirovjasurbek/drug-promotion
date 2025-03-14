@@ -6,11 +6,13 @@ import 'package:drugpromotion/core/helpers/storage_repository.dart';
 import 'package:drugpromotion/core/repositories/login.dart';
 import 'package:drugpromotion/core/routes/route_names.dart';
 import 'package:drugpromotion/core/widgets/button/button.dart';
+import 'package:drugpromotion/core/widgets/scale/scale.dart';
 import 'package:drugpromotion/core/widgets/text_field/text_field.dart';
 import 'package:drugpromotion/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 
 class LoginPage extends StatefulWidget {
@@ -99,12 +101,32 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     SizedBox(height: 16.h),
-                    WTextFormField(
-                      controller: passwordController,
-                      label: AppLocalization.current.password,
-                      suffix: Icon(Icons.remove_red_eye),
-                      validator: (value) {
-                        return null;
+                    BlocBuilder<LoginBloc, LoginState>(
+                      builder: (context, state) {
+                        return WTextFormField(
+                          controller: passwordController,
+                          obscure: !state.isPasswordVisible,
+                          label: AppLocalization.current.password,
+                          suffix: WScale(
+                            onTap: () {
+                              context
+                                  .read<LoginBloc>()
+                                  .add(LoginPasswordVisibilityEvent(
+                                    !state.isPasswordVisible,
+                                  ));
+                            },
+                            child: AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 250),
+                              child: switch (state.isPasswordVisible) {
+                                (true) => SvgPicture.asset(AppAssets.eyeOn),
+                                (false) => SvgPicture.asset(AppAssets.eyeOff),
+                              },
+                            ),
+                          ),
+                          validator: (value) {
+                            return null;
+                          },
+                        );
                       },
                     ),
                   ],
