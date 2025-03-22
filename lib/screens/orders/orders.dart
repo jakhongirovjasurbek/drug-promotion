@@ -1,10 +1,12 @@
 import 'package:drugpromotion/assets/colors.dart';
+import 'package:drugpromotion/core/bloc/orders/cargo_bloc.dart';
 import 'package:drugpromotion/core/routes/route_names.dart';
 import 'package:drugpromotion/core/widgets/scale/scale.dart';
 import 'package:drugpromotion/generated/l10n.dart';
 import 'package:drugpromotion/screens/home/widgets/cargo_item.dart';
 import 'package:drugpromotion/screens/orders/pages/yandex_map.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrdersPage extends StatefulWidget {
@@ -76,11 +78,17 @@ class _OrdersPageState extends State<OrdersPage>
         index: controller.index,
         children: [
           const YandexMapScreen(),
-          ListView.separated(
-            padding: EdgeInsets.fromLTRB(0, 8.h, 0, 100.h),
-            itemBuilder: (context, index) => CargoItem(),
-            separatorBuilder: (_, __) => SizedBox(height: 8.h),
-            itemCount: 10,
+          BlocBuilder<CargoBloc, CargoState>(
+            builder: (context, state) {
+              return ListView.separated(
+                padding: EdgeInsets.fromLTRB(0, 8.h, 0, 100.h),
+                itemBuilder: (context, index) => CargoItem(
+                  cargo: state.cargos[index],
+                ),
+                separatorBuilder: (_, __) => SizedBox(height: 8.h),
+                itemCount: state.cargos.length,
+              );
+            },
           ),
         ],
       ),

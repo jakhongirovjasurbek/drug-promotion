@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:drugpromotion/core/bloc/authentication/authentication_bloc.dart';
 import 'package:drugpromotion/core/methods/setup_locator.dart';
 import 'package:drugpromotion/core/routes/routes.dart';
+import 'package:drugpromotion/firebase_options.dart';
 import 'package:drugpromotion/generated/l10n.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,12 +18,17 @@ void main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
 
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+
       await ScreenUtil.ensureScreenSize();
 
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
+
 
       await setupLocator();
 

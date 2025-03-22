@@ -6,9 +6,9 @@ final class AuthUserModel {
   final String? image;
 
   const AuthUserModel({
-    required this.id,
-    required this.username,
-    required this.phoneNumber,
+    this.id = '',
+    this.username = '',
+    this.phoneNumber = '',
     this.email,
     this.image,
   });

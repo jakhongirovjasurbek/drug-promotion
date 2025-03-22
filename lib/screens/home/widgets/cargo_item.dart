@@ -1,12 +1,16 @@
 import 'package:drugpromotion/assets/assets.dart';
 import 'package:drugpromotion/assets/colors.dart';
+import 'package:drugpromotion/core/models/cargo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CargoItem extends StatelessWidget {
+  final CargoModel cargo;
+
   const CargoItem({
     super.key,
+    required this.cargo,
   });
 
   @override
@@ -18,22 +22,39 @@ class CargoItem extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 Text(
-                  '#9430034',
+                  '#${cargo.cargoId}',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.grey,
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
+                SizedBox(width: 16.w),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 4.h,
+                      horizontal: 8.w,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color(0XFFF7F7F8),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Text(cargo.cargoStatus.name),
+                  ),
+                )
               ],
             ),
             SizedBox(height: 8.h),
             Text(
-              'The task name may be long and not fit in one line',
+              cargo.cargoDate,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: AppColors.blackish,
                     fontSize: 17,
@@ -62,7 +83,9 @@ class CargoItem extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Expanded(
                   child: Text(
-                    'Улица Шахризабская, дом 5 Подбрось монетку, Орел Решка... ',
+                    cargo.orders.fold('', (sum, order) {
+                      return '${sum.trim().isNotEmpty ? ', ' : ''}${order.address}';
+                    }),
                     maxLines: 2,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.blackish,

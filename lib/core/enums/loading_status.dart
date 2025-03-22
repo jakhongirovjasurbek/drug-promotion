@@ -6,7 +6,7 @@ enum LoadingStatus {
 
   bool get isPure => this == pure;
 
-  bool get isLoading => this == loading || this == loadSuccess;
+  bool get isLoading => this == loading || this == LoadingStatus.loading;
 
   bool get isLoadSuccess => this == loadSuccess;
 
