@@ -4,4 +4,6 @@ abstract final class RouteNames {
   static const main = '/main';
   static const notifications = '/notifications';
   static const unknown = '/unknown';
+  static const cargoDetail = '/cargo-detail';
+  static const orderHistory = '/order-history';
 }

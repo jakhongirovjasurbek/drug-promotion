@@ -1,10 +1,12 @@
 import 'package:drugpromotion/assets/assets.dart';
 import 'package:drugpromotion/assets/colors.dart';
+import 'package:drugpromotion/core/bloc/orders/cargo_bloc.dart';
 import 'package:drugpromotion/core/routes/route_names.dart';
 import 'package:drugpromotion/core/widgets/scale/scale.dart';
 import 'package:drugpromotion/generated/l10n.dart';
 import 'package:drugpromotion/screens/profile/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -108,7 +110,10 @@ class ProfilePage extends StatelessWidget {
                 hasDivider: false,
                 title: AppLocalization.current.order_history,
                 icon: AppAssets.history,
-                onTap: () {},
+                onTap: () => Navigator.of(context).pushNamed(
+                  RouteNames.orderHistory,
+                  arguments: context.read<CargoBloc>(),
+                ),
               ),
             ),
             ProfileItem(

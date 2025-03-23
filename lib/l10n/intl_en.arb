@@ -27,5 +27,10 @@
   "notifications": "Notifications",
   "language": "Language",
   "help": "Help",
-  "logout": "Log out"
+  "logout": "Log out",
+  "beingFormed": "Being formed",
+  "readyForLoading": "Ready for loading",
+  "onTheWay": "On the way",
+  "closed": "Completed",
+  "unknown": "Unknown",
 }

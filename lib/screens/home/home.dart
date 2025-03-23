@@ -77,8 +77,6 @@ class HomePage extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            print('Status: ${state.status}');
-
             if (state.status.isPure) {
               context.read<CargoBloc>().add(CargoGetItemsEvent(args: null));
             }
@@ -89,15 +87,15 @@ class HomePage extends StatelessWidget {
               );
             }
 
-            print('Length: ${state.cargos.length}');
+            final cargos = state.cargos
+                .where((item) => !item.cargoStatus.isClosed)
+                .toList();
 
             return ListView.separated(
               padding: EdgeInsets.fromLTRB(0, 8.h, 0, 100.h),
-              itemBuilder: (context, index) => CargoItem(
-                cargo: state.cargos[index],
-              ),
+              itemBuilder: (context, index) => CargoItem(cargo: cargos[index]),
               separatorBuilder: (_, __) => SizedBox(height: 8.h),
-              itemCount: state.cargos.length,
+              itemCount: cargos.length,
             );
           },
         ),

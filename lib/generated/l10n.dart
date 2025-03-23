@@ -329,6 +329,56 @@ class AppLocalization {
       args: [],
     );
   }
+
+  /// `Being formed`
+  String get beingFormed {
+    return Intl.message(
+      'Being formed',
+      name: 'beingFormed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready for loading`
+  String get readyForLoading {
+    return Intl.message(
+      'Ready for loading',
+      name: 'readyForLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `On the way`
+  String get onTheWay {
+    return Intl.message(
+      'On the way',
+      name: 'onTheWay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get closed {
+    return Intl.message(
+      'Completed',
+      name: 'closed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown`
+  String get unknown {
+    return Intl.message(
+      'Unknown',
+      name: 'unknown',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

@@ -29,7 +29,6 @@ void main() {
         DeviceOrientation.portraitDown,
       ]);
 
-
       await setupLocator();
 
       runApp(const DrugPromotionApp());
@@ -72,6 +71,7 @@ class DrugPromotionApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             themeAnimationCurve: Curves.slowMiddle,
             onGenerateRoute: AppRoutes.onGenerateRoute,
+            locale: Locale('ru'),
             supportedLocales: AppLocalization.delegate.supportedLocales,
             localizationsDelegates: const [
               AppLocalization.delegate,

@@ -26,9 +26,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "active": MessageLookupByLibrary.simpleMessage("Active"),
         "add_avatar": MessageLookupByLibrary.simpleMessage("Add avatar"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
+        "beingFormed": MessageLookupByLibrary.simpleMessage("Being formed"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "change_avatar": MessageLookupByLibrary.simpleMessage("Change avatar"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "closed": MessageLookupByLibrary.simpleMessage("Completed"),
         "complete_order":
             MessageLookupByLibrary.simpleMessage("Complete order"),
         "delivered": MessageLookupByLibrary.simpleMessage("Delivered"),
@@ -46,11 +48,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "map": MessageLookupByLibrary.simpleMessage("Map"),
         "my_orders": MessageLookupByLibrary.simpleMessage("My orders"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "onTheWay": MessageLookupByLibrary.simpleMessage("On the way"),
         "order_details": MessageLookupByLibrary.simpleMessage("Order details"),
         "order_history": MessageLookupByLibrary.simpleMessage("Order history"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone number"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "readyForLoading":
+            MessageLookupByLibrary.simpleMessage("Ready for loading"),
+        "unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
         "username": MessageLookupByLibrary.simpleMessage("Username")
       };
 }

@@ -21,5 +21,43 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accept_order": MessageLookupByLibrary.simpleMessage("Принять заказ"),
+        "active": MessageLookupByLibrary.simpleMessage("Активные"),
+        "add_avatar": MessageLookupByLibrary.simpleMessage("Добавить аватар"),
+        "back": MessageLookupByLibrary.simpleMessage("Назад"),
+        "beingFormed": MessageLookupByLibrary.simpleMessage("Формируется"),
+        "camera": MessageLookupByLibrary.simpleMessage("Камера"),
+        "change_avatar":
+            MessageLookupByLibrary.simpleMessage("Изменить аватар"),
+        "close": MessageLookupByLibrary.simpleMessage("Закрыть"),
+        "closed": MessageLookupByLibrary.simpleMessage("Завершено"),
+        "complete_order":
+            MessageLookupByLibrary.simpleMessage("Завершить заказ"),
+        "delivered": MessageLookupByLibrary.simpleMessage("Доставлено"),
+        "distance": MessageLookupByLibrary.simpleMessage("Расстояние"),
+        "driving_time": MessageLookupByLibrary.simpleMessage("Время в пути"),
+        "email": MessageLookupByLibrary.simpleMessage("Электронная почта"),
+        "forgot_password":
+            MessageLookupByLibrary.simpleMessage("Забыли пароль?"),
+        "help": MessageLookupByLibrary.simpleMessage("Помощь"),
+        "home": MessageLookupByLibrary.simpleMessage("Главная"),
+        "home_page": MessageLookupByLibrary.simpleMessage("Главная страница"),
+        "language": MessageLookupByLibrary.simpleMessage("Язык"),
+        "login": MessageLookupByLibrary.simpleMessage("Логин"),
+        "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
+        "map": MessageLookupByLibrary.simpleMessage("Карта"),
+        "my_orders": MessageLookupByLibrary.simpleMessage("Мои заказы"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
+        "onTheWay": MessageLookupByLibrary.simpleMessage("Отправлено"),
+        "order_details": MessageLookupByLibrary.simpleMessage("Детали заказа"),
+        "order_history":
+            MessageLookupByLibrary.simpleMessage("История заказов"),
+        "password": MessageLookupByLibrary.simpleMessage("Пароль"),
+        "phone_number": MessageLookupByLibrary.simpleMessage("Номер телефона"),
+        "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
+        "readyForLoading": MessageLookupByLibrary.simpleMessage("К погрузке"),
+        "unknown": MessageLookupByLibrary.simpleMessage("Неизвестно"),
+        "username": MessageLookupByLibrary.simpleMessage("Имя пользователя")
+      };
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:drugpromotion/assets/constants.dart';
 import 'package:drugpromotion/core/helpers/storage_repository.dart';
 import 'package:flutter/foundation.dart';
 
@@ -30,7 +31,7 @@ class RequestInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = StorageRepository.getString('access_token');
+    final token = StorageRepository.getString(AppConstants.accessTokenKey);
 
     options.headers.addAll({
       'Accept-Language':

@@ -20,12 +20,7 @@ final class CargoRepository {
         },
       );
 
-      print('Raw data: ${response.data}');
-
-      print('Response data: ${jsonDecode(response.data)}');
-
       final data = jsonDecode(response.data);
-      print('Decoded data type:${data.runtimeType} and data: $data ');
 
       return CargoModel.buildList(data);
     });

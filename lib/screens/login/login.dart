@@ -1,4 +1,5 @@
 import 'package:drugpromotion/assets/assets.dart';
+import 'package:drugpromotion/assets/constants.dart';
 import 'package:drugpromotion/core/bloc/authentication/authentication_bloc.dart';
 import 'package:drugpromotion/core/bloc/login/login_bloc.dart';
 import 'package:drugpromotion/core/enums/auth_status.dart';
@@ -37,7 +38,10 @@ class _LoginPageState extends State<LoginPage> {
           BlocListener<LoginBloc, LoginState>(
             listener: (context, state) async {
               if (state.status.isLoadSuccess) {
-                await StorageRepository.putString('access_token', state.token!);
+                await StorageRepository.putString(
+                  AppConstants.accessTokenKey,
+                  state.token!,
+                );
 
                 context.read<AuthenticationBloc>().add(
                       AuthenticationStatusChanged(

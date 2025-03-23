@@ -26,13 +26,10 @@ class CargoBloc extends Bloc<CargoEvent, CargoState> {
           ));
         },
         (cargos) {
-          print('Here we are: $cargos');
-
           emit(state.copyWith(
             status: LoadingStatus.loadSuccess,
             cargos: cargos,
           ));
-          print('Status: ${state.status}');
         },
       );
     });
