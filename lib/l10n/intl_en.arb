@@ -33,4 +33,12 @@
   "onTheWay": "On the way",
   "closed": "Completed",
   "unknown": "Unknown",
+  "save": "Save",
+  "uzbek": "O'zbek tili",
+  "english": "English",
+  "russian": "Pусский",
+  "deliver": "Deliver",
+  "orders": "Orders",
+  "retake": "Retake",
+  "send": "Send"
 }

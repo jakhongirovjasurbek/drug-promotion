@@ -1,5 +1,8 @@
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:drugpromotion/core/dio/interceptor.dart';
+import 'package:sentry_dio/sentry_dio.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class DioSettings {
   final _dioBaseOptions = BaseOptions(
@@ -13,7 +16,11 @@ class DioSettings {
   BaseOptions get dioBaseOptions => _dioBaseOptions;
 
   Dio get dio => Dio(_dioBaseOptions)
+    ..addSentry(
+      failedRequestStatusCodes: [SentryStatusCode.range(300, 599)],
+    )
     ..interceptors.addAll([
       const RequestInterceptor(),
+      ChuckerDioInterceptor(),
     ]);
 }

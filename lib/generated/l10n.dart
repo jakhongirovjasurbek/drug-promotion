@@ -18,17 +18,20 @@ class AppLocalization {
   static AppLocalization? _current;
 
   static AppLocalization get current {
-    assert(_current != null,
-        'No instance of AppLocalization was loaded. Try to initialize the AppLocalization delegate before accessing AppLocalization.current.');
+    assert(
+      _current != null,
+      'No instance of AppLocalization was loaded. Try to initialize the AppLocalization delegate before accessing AppLocalization.current.',
+    );
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<AppLocalization> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -41,8 +44,10 @@ class AppLocalization {
 
   static AppLocalization of(BuildContext context) {
     final instance = AppLocalization.maybeOf(context);
-    assert(instance != null,
-        'No instance of AppLocalization present in the widget tree. Did you add AppLocalization.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of AppLocalization present in the widget tree. Did you add AppLocalization.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -52,22 +57,12 @@ class AppLocalization {
 
   /// `Login`
   String get login {
-    return Intl.message(
-      'Login',
-      name: 'login',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Login', name: 'login', desc: '', args: []);
   }
 
   /// `Password`
   String get password {
-    return Intl.message(
-      'Password',
-      name: 'password',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Password', name: 'password', desc: '', args: []);
   }
 
   /// `Forgot password?`
@@ -82,52 +77,27 @@ class AppLocalization {
 
   /// `Home page`
   String get home_page {
-    return Intl.message(
-      'Home page',
-      name: 'home_page',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Home page', name: 'home_page', desc: '', args: []);
   }
 
   /// `Home`
   String get home {
-    return Intl.message(
-      'Home',
-      name: 'home',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Home', name: 'home', desc: '', args: []);
   }
 
   /// `My orders`
   String get my_orders {
-    return Intl.message(
-      'My orders',
-      name: 'my_orders',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('My orders', name: 'my_orders', desc: '', args: []);
   }
 
   /// `Profile`
   String get profile {
-    return Intl.message(
-      'Profile',
-      name: 'profile',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Profile', name: 'profile', desc: '', args: []);
   }
 
   /// `Back`
   String get back {
-    return Intl.message(
-      'Back',
-      name: 'back',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Back', name: 'back', desc: '', args: []);
   }
 
   /// `Accept order`
@@ -142,12 +112,7 @@ class AppLocalization {
 
   /// `Distance`
   String get distance {
-    return Intl.message(
-      'Distance',
-      name: 'distance',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Distance', name: 'distance', desc: '', args: []);
   }
 
   /// `Driving time`
@@ -162,12 +127,7 @@ class AppLocalization {
 
   /// `Delivered`
   String get delivered {
-    return Intl.message(
-      'Delivered',
-      name: 'delivered',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Delivered', name: 'delivered', desc: '', args: []);
   }
 
   /// `Order details`
@@ -182,12 +142,7 @@ class AppLocalization {
 
   /// `Close`
   String get close {
-    return Intl.message(
-      'Close',
-      name: 'close',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Close', name: 'close', desc: '', args: []);
   }
 
   /// `Complete order`
@@ -202,52 +157,27 @@ class AppLocalization {
 
   /// `Camera`
   String get camera {
-    return Intl.message(
-      'Camera',
-      name: 'camera',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Camera', name: 'camera', desc: '', args: []);
   }
 
   /// `Map`
   String get map {
-    return Intl.message(
-      'Map',
-      name: 'map',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Map', name: 'map', desc: '', args: []);
   }
 
   /// `Active`
   String get active {
-    return Intl.message(
-      'Active',
-      name: 'active',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Active', name: 'active', desc: '', args: []);
   }
 
   /// `Add avatar`
   String get add_avatar {
-    return Intl.message(
-      'Add avatar',
-      name: 'add_avatar',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Add avatar', name: 'add_avatar', desc: '', args: []);
   }
 
   /// `Username`
   String get username {
-    return Intl.message(
-      'Username',
-      name: 'username',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Username', name: 'username', desc: '', args: []);
   }
 
   /// `Change avatar`
@@ -272,12 +202,7 @@ class AppLocalization {
 
   /// `Email`
   String get email {
-    return Intl.message(
-      'Email',
-      name: 'email',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Email', name: 'email', desc: '', args: []);
   }
 
   /// `Order history`
@@ -302,32 +227,17 @@ class AppLocalization {
 
   /// `Language`
   String get language {
-    return Intl.message(
-      'Language',
-      name: 'language',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Language', name: 'language', desc: '', args: []);
   }
 
   /// `Help`
   String get help {
-    return Intl.message(
-      'Help',
-      name: 'help',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Help', name: 'help', desc: '', args: []);
   }
 
   /// `Log out`
   String get logout {
-    return Intl.message(
-      'Log out',
-      name: 'logout',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Log out', name: 'logout', desc: '', args: []);
   }
 
   /// `Being formed`
@@ -352,32 +262,57 @@ class AppLocalization {
 
   /// `On the way`
   String get onTheWay {
-    return Intl.message(
-      'On the way',
-      name: 'onTheWay',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('On the way', name: 'onTheWay', desc: '', args: []);
   }
 
   /// `Completed`
   String get closed {
-    return Intl.message(
-      'Completed',
-      name: 'closed',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Completed', name: 'closed', desc: '', args: []);
   }
 
   /// `Unknown`
   String get unknown {
-    return Intl.message(
-      'Unknown',
-      name: 'unknown',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Unknown', name: 'unknown', desc: '', args: []);
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
+  }
+
+  /// `O'zbek tili`
+  String get uzbek {
+    return Intl.message('O\'zbek tili', name: 'uzbek', desc: '', args: []);
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message('English', name: 'english', desc: '', args: []);
+  }
+
+  /// `Pусский`
+  String get russian {
+    return Intl.message('Pусский', name: 'russian', desc: '', args: []);
+  }
+
+  /// `Deliver`
+  String get deliver {
+    return Intl.message('Deliver', name: 'deliver', desc: '', args: []);
+  }
+
+  /// `Orders`
+  String get orders {
+    return Intl.message('Orders', name: 'orders', desc: '', args: []);
+  }
+
+  /// `Retake`
+  String get retake {
+    return Intl.message('Retake', name: 'retake', desc: '', args: []);
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message('Send', name: 'send', desc: '', args: []);
   }
 }
 

@@ -9,6 +9,7 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
+  sentry_flutter: ^8.14.2
   flutter:
     sdk: flutter
 
@@ -30,8 +31,18 @@ dependencies:
   flutter_screenutil: ^5.9.3
   mask_text_input_formatter: ^2.9.0
   firebase_core: ^3.12.1
+  provider: ^6.1.4
+  image_picker: ^1.1.2
+  geolocator: ^13.0.4
+  firebase_messaging: ^15.2.5
+  camera: ^0.11.1
+  chucker_flutter: ^1.8.3
+  sentry_dio: ^8.14.2
+  webview_flutter: ^4.11.0
 
 dev_dependencies:
+  sentry_dart_plugin: ^2.4.1
+  flutter_launcher_icons: "^0.14.3"
   flutter_test:
     sdk: flutter
 
@@ -73,3 +84,16 @@ flutter_intl:
     - en
     - ru
   use-deferred-loading: true
+sentry:
+  upload_debug_symbols: true
+  upload_source_maps: true
+  project: flutter
+  org: drug-promotion
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/logo_launcher.png"
+  adaptive_icon_background: "#ffffff"
+  remove_alpha_ios: true
+  min_sdk_android: 21

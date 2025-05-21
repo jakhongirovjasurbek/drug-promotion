@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 final class CargoModel extends Equatable {
   final String cargoId;
   final String cargoDate;
+  final String description;
   final CargoStatus cargoStatus;
   final List<OrderModel> orders;
 
@@ -13,6 +14,7 @@ final class CargoModel extends Equatable {
     required this.cargoDate,
     required this.cargoStatus,
     required this.orders,
+    required this.description,
   });
 
   factory CargoModel.fromJson(Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ final class CargoModel extends Equatable {
       cargoDate: json['cargo_date'],
       cargoStatus: CargoStatus.fromCode(json['cargo_status']),
       orders: OrderModel.buildList(json['orders']),
+      description: json['cargo_description'],
     );
   }
 
@@ -29,5 +32,26 @@ final class CargoModel extends Equatable {
   }
 
   @override
-  List<Object> get props => [cargoId, cargoDate, cargoStatus, orders];
+  List<Object> get props => [cargoId, cargoDate, cargoStatus, orders, description];
+
+  CargoModel copyWith({
+    String? cargoId,
+    String? cargoDate,
+    String? description,
+    CargoStatus? cargoStatus,
+    List<OrderModel>? orders,
+  }) {
+    return CargoModel(
+      cargoId: cargoId ?? this.cargoId,
+      cargoDate: cargoDate ?? this.cargoDate,
+      description: description ?? this.description,
+      cargoStatus: cargoStatus ?? this.cargoStatus,
+      orders: orders ?? this.orders,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'CargoModel{cargoId: $cargoId, cargoDate: $cargoDate, description: $description, cargoStatus: $cargoStatus, orders: $orders}';
+  }
 }

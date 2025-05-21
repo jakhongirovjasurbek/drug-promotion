@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-PageRouteBuilder fade({
+PageRouteBuilder fade<T>({
   required Widget page,
   required String name,
 }) {
-  return PageRouteBuilder<Widget>(
+  return PageRouteBuilder<T>(
     transitionDuration: const Duration(milliseconds: 200),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-        FadeTransition(
+    transitionsBuilder: (context, animation, secondaryAnimation, child) => FadeTransition(
       opacity: CurvedAnimation(
         parent: animation,
         curve: const Interval(

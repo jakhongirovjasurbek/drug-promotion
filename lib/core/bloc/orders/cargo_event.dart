@@ -10,3 +10,13 @@ final class CargoGetItemsEvent extends CargoEvent {
 
   const CargoGetItemsEvent({required this.args});
 }
+
+final class CargoChangeStatusEvent extends CargoEvent {
+  final String cargoId;
+  final CargoStatus status;
+
+  const CargoChangeStatusEvent({
+    required this.cargoId,
+    required this.status,
+  });
+}

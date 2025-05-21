@@ -52,7 +52,7 @@ class CargoItem extends StatelessWidget {
               ),
               SizedBox(height: 8.h),
               Text(
-                cargo.cargoDate,
+                cargo.description,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: AppColors.blackish,
                       fontSize: 17,

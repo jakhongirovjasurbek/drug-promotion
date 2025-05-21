@@ -32,5 +32,13 @@
   "readyForLoading": "К погрузке",
   "onTheWay": "Отправлено",
   "closed": "Завершено",
-  "unknown": "Неизвестно"
+  "unknown": "Неизвестно",
+  "save": "Сохранить",
+  "uzbek": "O'zbek tili",
+  "english": "English",
+  "russian": "Pусский",
+  "deliver": "Доставлять",
+  "orders": "Заказы",
+  "retake": "Retake",
+  "send": "Send"
 }

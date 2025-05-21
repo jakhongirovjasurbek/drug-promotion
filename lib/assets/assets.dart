@@ -16,4 +16,6 @@ final class AppAssets {
   static const addCircle = 'assets/icons/add_circle.svg';
   static const arrowRightChevron = 'assets/icons/chevron_right.svg';
   static const arrowLeftChiron = 'assets/icons/left_chiron.svg';
+  static const orderMark = 'assets/icons/order_mark.png';
+  static const navigator = 'assets/icons/navigator.png';
 }

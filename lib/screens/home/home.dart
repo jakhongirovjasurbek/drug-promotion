@@ -49,55 +49,57 @@ class HomePage extends StatelessWidget {
             ],
           )
         ],
-        body: BlocConsumer<CargoBloc, CargoState>(
-          listener: (context, state) {
-            if (state.status.isLoadFailure) {
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        body: RefreshIndicator(
+          color: AppColors.deepBlue,
+          onRefresh: () async => context.read<CargoBloc>().add(CargoGetItemsEvent(args: null)),
+          child: BlocConsumer<CargoBloc, CargoState>(
+            listener: (context, state) {
+              if (state.status.isLoadFailure) {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  dismissDirection: DismissDirection.horizontal,
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  content: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 16.h,
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    dismissDirection: DismissDirection.horizontal,
+                    elevation: 0,
+                    backgroundColor: Colors.transparent,
+                    content: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
-                      child: Text(state.error!),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 16.h,
+                        ),
+                        child: Text(state.error!),
+                      ),
                     ),
                   ),
-                ),
+                );
+              }
+            },
+            builder: (context, state) {
+              if (state.status.isPure) {
+                context.read<CargoBloc>().add(CargoGetItemsEvent(args: null));
+              }
+
+              if (state.status.isLoading) {
+                return Center(
+                  child: CircularProgressIndicator(color: AppColors.deepBlue),
+                );
+              }
+
+              final cargos = state.cargos.where((item) => !item.cargoStatus.isClosed).toList();
+
+              return ListView.separated(
+                padding: EdgeInsets.fromLTRB(0, 8.h, 0, 100.h),
+                itemBuilder: (context, index) => CargoItem(cargo: cargos[index]),
+                separatorBuilder: (_, __) => SizedBox(height: 8.h),
+                itemCount: cargos.length,
               );
-            }
-          },
-          builder: (context, state) {
-            if (state.status.isPure) {
-              context.read<CargoBloc>().add(CargoGetItemsEvent(args: null));
-            }
-
-            if (state.status.isLoading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-
-            final cargos = state.cargos
-                .where((item) => !item.cargoStatus.isClosed)
-                .toList();
-
-            return ListView.separated(
-              padding: EdgeInsets.fromLTRB(0, 8.h, 0, 100.h),
-              itemBuilder: (context, index) => CargoItem(cargo: cargos[index]),
-              separatorBuilder: (_, __) => SizedBox(height: 8.h),
-              itemCount: cargos.length,
-            );
-          },
+            },
+          ),
         ),
       ),
     );
