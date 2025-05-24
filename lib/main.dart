@@ -42,24 +42,23 @@ Future<void> main() async {
       ChuckerFlutter.showOnRelease = true;
 
       await SentryFlutter.init(
-    (options) {
-      options.dsn = 'https://cb88510339b2c4e1c667db72aee63c1e@o4509258176397312.ingest.de.sentry.io/4509258177773648';
-      // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
-      // We recommend adjusting this value in production.
-      options.tracesSampleRate = 1.0;
-      // The sampling rate for profiling is relative to tracesSampleRate
-      // Setting to 1.0 will profile 100% of sampled transactions:
-      options.profilesSampleRate = 1.0;
-    },
-    appRunner: () => runApp(SentryWidget(child: const DrugPromotionApp())),
-  );
-  // TODO: Remove this line after sending the first sample event to sentry.
-  await Sentry.captureException(StateError('This is a sample exception.'));
+        (options) {
+          options.dsn =
+              'https://cb88510339b2c4e1c667db72aee63c1e@o4509258176397312.ingest.de.sentry.io/4509258177773648';
+          // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
+          // We recommend adjusting this value in production.
+          options.tracesSampleRate = 1.0;
+          // The sampling rate for profiling is relative to tracesSampleRate
+          // Setting to 1.0 will profile 100% of sampled transactions:
+          options.profilesSampleRate = 1.0;
+        },
+        appRunner: () => runApp(SentryWidget(child: const DrugPromotionApp())),
+      );
     },
     (error, stacktrace) {
-      if (kDebugMode) {
-        // TODO: Handle exception
+      Sentry.captureException(error, stackTrace: stacktrace);
 
+      if (kDebugMode) {
         print('Exception, $error, \n$stacktrace');
       }
     },

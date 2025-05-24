@@ -9,7 +9,6 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 part 'cargo_event.dart';
-
 part 'cargo_state.dart';
 
 class CargoBloc extends Bloc<CargoEvent, CargoState> {
@@ -55,6 +54,8 @@ class CargoBloc extends Bloc<CargoEvent, CargoState> {
           ));
         },
         (_) {
+          print('It came to success');
+
           final cargos = state.cargos.map((cargo) {
             if (cargo.cargoId == event.cargoId) {
               return cargo.copyWith(cargoStatus: event.status);

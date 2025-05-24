@@ -150,7 +150,13 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           ));
         },
         (cargo) {
-          if (cargo.isEmpty) return;
+          if (cargo.isEmpty) {
+            emit(state.copyWith(
+              getStatus: LoadingStatus.loadSuccess,
+            ));
+
+            return;
+          }
 
           emit(state.copyWith(
             getStatus: LoadingStatus.loadSuccess,

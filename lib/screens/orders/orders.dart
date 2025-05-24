@@ -12,6 +12,7 @@ import 'package:drugpromotion/screens/orders/pages/yandex_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 
 class OrdersPage extends StatefulWidget {
   const OrdersPage({super.key});
@@ -89,13 +90,12 @@ class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateM
                 onRefresh: () async {
                   context.read<OrderBloc>().add(OrderGetCargoEvent());
                 },
-                child: Center(
-                  child: Text('No cargo selected'),
-                ),
+                child: Center(child: Text('No cargo selected')),
               );
             case LoadingStatus.loading:
               return Center(child: Text('Cargo is loading'));
             case LoadingStatus.loadSuccess:
+              if (state.activeCargo == null) return Center(child: Text('No cargo selected'));
               return IndexedStack(
                 index: controller.index,
                 children: [
@@ -242,7 +242,7 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
                         ),
                       ),
                     ),
-                    if (state.getStatus.isLoadSuccess && showBottomSheet) ...{
+                    if (state.getStatus.isLoadSuccess && showBottomSheet && state.activeCargo != null) ...{
                       Text(
                         state.activeCargo!.description,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -261,7 +261,9 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
                         if (state.orderDetails?.status.isDelivering != true)
                           WButton(
                             loading: state.orderStatus.isLoading,
-                            onTap: () {
+                            onTap: () async {
+                              final position = await Geolocator.getCurrentPosition();
+
                               context.read<OrderBloc>().add(OrderAcceptEvent(
                                     cargoId: state.activeCargo!.cargoId,
                                     orderId: order.orderId,

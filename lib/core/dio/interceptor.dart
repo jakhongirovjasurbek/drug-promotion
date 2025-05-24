@@ -34,8 +34,7 @@ class RequestInterceptor extends Interceptor {
     final token = StorageRepository.getString(AppConstants.accessTokenKey);
 
     options.headers.addAll({
-      'Accept-Language':
-          StorageRepository.getString('language', defValue: 'uz'),
+      'Accept-Language': StorageRepository.getString('language', defValue: 'uz'),
       if (!options.headers.keys.contains('without_token'))
         if (token.isNotEmpty) 'Authorization': token,
     });
@@ -53,6 +52,20 @@ class RequestInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) {
-    return handler.next(response);
+    final statusCode = response.statusCode ?? 0;
+
+    if (statusCode >= 200 && statusCode < 300) {
+      handler.next(response);
+    } else {
+      handler.reject(
+        DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+          type: DioExceptionType.badResponse,
+          error: response.data,
+        ),
+        true,
+      );
+    }
   }
 }

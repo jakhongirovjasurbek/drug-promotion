@@ -82,9 +82,7 @@ class CargoItem extends StatelessWidget {
                   Expanded(
                     child: Text(
                       cargo.orders.fold('', (sum, order) {
-                        return sum.isEmpty
-                            ? order.address
-                            : '${order.address}, ';
+                        return sum.isEmpty ? order.address : '${order.address}, ';
                       }),
                       maxLines: 2,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -93,9 +91,9 @@ class CargoItem extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                           ),
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
           ),
         ),

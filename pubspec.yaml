@@ -3,7 +3,7 @@ description: "Delivery project"
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0+100
 
 environment:
   sdk: ^3.6.0
@@ -89,11 +89,3 @@ sentry:
   upload_source_maps: true
   project: flutter
   org: drug-promotion
-
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/icons/logo_launcher.png"
-  adaptive_icon_background: "#ffffff"
-  remove_alpha_ios: true
-  min_sdk_android: 21
