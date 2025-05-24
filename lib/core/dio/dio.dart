@@ -6,7 +6,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 class DioSettings {
   final _dioBaseOptions = BaseOptions(
-    baseUrl: 'http://109.94.175.101/ka_test/hs/delivery',
+    baseUrl: 'https://drugpromotion.uz/ka_test/hs/delivery',
     connectTimeout: const Duration(milliseconds: 35000),
     receiveTimeout: const Duration(milliseconds: 35000),
     followRedirects: false,
