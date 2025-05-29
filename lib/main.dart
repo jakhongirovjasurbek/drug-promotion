@@ -39,8 +39,6 @@ Future<void> main() async {
 
       await setupLocator();
 
-      ChuckerFlutter.showOnRelease = true;
-
       await SentryFlutter.init(
         (options) {
           options.dsn =

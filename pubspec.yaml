@@ -3,7 +3,7 @@ description: "Delivery project"
 
 publish_to: 'none'
 
-version: 1.0.0+100
+version: 1.0.0+110
 
 environment:
   sdk: ^3.6.0
