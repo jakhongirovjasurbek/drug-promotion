@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:drugpromotion/core/bloc/authentication/authentication_bloc.dart';
 import 'package:drugpromotion/core/bloc/main/main_bloc.dart';
+import 'package:drugpromotion/core/bloc/notifications/notifications_bloc.dart';
 import 'package:drugpromotion/core/bloc/order/order_bloc.dart';
 import 'package:drugpromotion/core/bloc/orders/cargo_bloc.dart';
 import 'package:drugpromotion/core/helpers/locale.dart';
 import 'package:drugpromotion/core/methods/setup_locator.dart';
 import 'package:drugpromotion/core/repositories/cargo.dart';
+import 'package:drugpromotion/core/repositories/driver_location.dart';
 import 'package:drugpromotion/core/routes/routes.dart';
 import 'package:drugpromotion/firebase_options.dart';
 import 'package:drugpromotion/generated/l10n.dart';
@@ -101,7 +103,12 @@ class _DrugPromotionAppState extends State<DrugPromotionApp> {
                 create: (context) => CargoBloc(repository),
               ),
               BlocProvider(
-                create: (context) => MainBloc(),
+                create: (context) => MainBloc(
+                  locationRepository: DriverLocationRepository(),
+                ),
+              ),
+              BlocProvider(
+                create: (context) => NotificationsBloc(),
               ),
             ],
             child: Builder(
@@ -111,7 +118,8 @@ class _DrugPromotionAppState extends State<DrugPromotionApp> {
                 return MaterialApp(
                   theme: ThemeData(
                     scaffoldBackgroundColor: Colors.white,
-                    appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFDAE2E2)),
+                    appBarTheme:
+                        const AppBarTheme(backgroundColor: Color(0xFFDAE2E2)),
                   ),
                   debugShowCheckedModeBanner: false,
                   themeAnimationCurve: Curves.slowMiddle,

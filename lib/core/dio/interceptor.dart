@@ -15,12 +15,13 @@ class RequestInterceptor extends Interceptor {
     if (kDebugMode) {
       print('''
       DioFailure:\n
+      Path: ${err.requestOptions.path}\n
       Message: ${err.message}\n
       Exception type: ${err.type}\n
       Error: ${err.error}\n
       Data: ${err.response?.data}\n
       Request options: ${err.requestOptions.data}\n
-      Path: ${err.requestOptions.path}\n
+      
       ''');
     }
     return handler.reject(err);

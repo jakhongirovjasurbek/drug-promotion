@@ -92,11 +92,12 @@ class _CargoDetailState extends State<CargoDetail> {
                     children: [
                       Text(
                         AppLocalization.of(context).orders,
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                              color: AppColors.blackish,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.displayLarge?.copyWith(
+                                  color: AppColors.blackish,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
                       ),
                       SizedBox(width: 8.w),
                       DecoratedBox(
@@ -105,10 +106,14 @@ class _CargoDetailState extends State<CargoDetail> {
                           color: AppColors.blackish,
                         ),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 6.w, vertical: 2.h),
                           child: Text(
                             'x${cargo.orders.length}',
-                            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayLarge
+                                ?.copyWith(
                                   color: Colors.white,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
@@ -120,9 +125,8 @@ class _CargoDetailState extends State<CargoDetail> {
                   ),
                 ),
               ),
-              SliverToBoxAdapter(child: SizedBox(height: 16.h)),
               SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (_, index) {
@@ -168,7 +172,8 @@ class _CargoDetailState extends State<CargoDetail> {
                   }
                 },
                 builder: (context, state) => WButton(
-                  margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                   loading: state.cargoStatus.isLoading,
                   onTap: () {
                     context.read<CargoBloc>().add(CargoChangeStatusEvent(

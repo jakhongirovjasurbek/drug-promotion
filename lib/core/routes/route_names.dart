@@ -11,4 +11,5 @@ abstract final class RouteNames {
   static const email = '/email';
   static const language = '/language';
   static const photo = '/image-picker';
+  static const savedImages = '/saved-images';
 }

@@ -3,6 +3,7 @@ import 'package:drugpromotion/core/bloc/authentication/authentication_bloc.dart'
 import 'package:drugpromotion/core/bloc/main/main_bloc.dart';
 import 'package:drugpromotion/core/helpers/locale.dart';
 import 'package:drugpromotion/core/helpers/location.dart';
+import 'package:drugpromotion/core/repositories/driver_location.dart';
 import 'package:drugpromotion/core/routes/route_names.dart';
 import 'package:drugpromotion/core/widgets/button/button.dart';
 import 'package:drugpromotion/generated/l10n.dart';
@@ -30,7 +31,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    mainBloc = MainBloc();
+    mainBloc = MainBloc(locationRepository: DriverLocationRepository());
 
     FirebaseMessaging.instance.getToken().then((token) {
       if (token == null) return;
@@ -47,6 +48,8 @@ class _MainPageState extends State<MainPage> {
     LocationService.initialize();
 
     requestPermission();
+
+    mainBloc.add(MainEvent$StartLocationUpdates());
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       ScaffoldMessenger.of(context).hideCurrentMaterialBanner();

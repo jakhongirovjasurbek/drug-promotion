@@ -33,10 +33,10 @@ final class OrderEndEvent extends OrderEvent {
   final String orderId;
   final String rowId;
   final String cargoId;
-  final XFile image;
+  final List<XFile> images;
 
   const OrderEndEvent({
-    required this.image,
+    required this.images,
     required this.orderId,
     required this.rowId,
     required this.cargoId,

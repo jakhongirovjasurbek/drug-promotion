@@ -88,18 +88,30 @@ final class CargoRepository {
   }
 
   Future<Either<ServerFailure, void>> uploadOrderImage({
-    required String path,
+    required List<String> paths,
     required String cargoId,
     required String rowId,
   }) async {
     return handleRequest(() async {
       final formData = FormData();
 
-      formData.fields.addAll({MapEntry('cargo_id', cargoId), MapEntry('row_id', rowId)});
+      formData.fields
+          .addAll({MapEntry('cargo_id', cargoId), MapEntry('row_id', rowId)});
 
-      formData.files.add(MapEntry('image', await MultipartFile.fromFile(path)));
+      for (final path in paths) {
+        formData.files
+            .add(MapEntry('image', await MultipartFile.fromFile(path)));
+      }
 
-      await dio.post('/image', data: formData);
+      await dio.post(
+        '/image',
+        options: Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        ),
+        data: formData,
+      );
 
       return;
     });

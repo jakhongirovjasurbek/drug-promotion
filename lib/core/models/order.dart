@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:equatable/equatable.dart';
 
 final class OrderModel extends Equatable {
@@ -38,17 +36,13 @@ final class OrderModel extends Equatable {
   }
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
-    final mockLocation = getMockTashkentLocation();
-
     return OrderModel(
       orderId: json['order_id'],
       rowId: json['row_id'],
       address: json['address'],
       isDelivered: json['is_delivered'],
-      latitude: mockLocation['latitude']!.toDouble(),
-      // json['lat'],
-      longitude: mockLocation['longitude']!.toDouble(),
-      // json['lng'],
+      latitude: json['lat'],
+      longitude: json['lng'],
       client: json['client'],
       clientPhone: json['client_phone'],
       expectedDistance: json['expected_distance'],
@@ -112,23 +106,4 @@ final class OrderModel extends Equatable {
       images: images ?? this.images,
     );
   }
-}
-
-/// Returns a random mock location (latitude and longitude) inside Tashkent
-Map<String, double> getMockTashkentLocation() {
-  final random = Random();
-
-  // Approximate bounding box around Tashkent
-  const double minLat = 41.2000;
-  const double maxLat = 41.4000;
-  const double minLng = 69.1500;
-  const double maxLng = 69.3500;
-
-  double lat = minLat + random.nextDouble() * (maxLat - minLat);
-  double lng = minLng + random.nextDouble() * (maxLng - minLng);
-
-  return {
-    'latitude': lat,
-    'longitude': lng,
-  };
 }

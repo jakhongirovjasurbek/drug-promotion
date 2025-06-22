@@ -1,6 +1,25 @@
 part of 'notifications_bloc.dart';
 
 @immutable
-sealed class NotificationsState {}
+final class NotificationsState extends Equatable {
+  final LoadingStatus getStatus;
+  final List<NotificationModel> notifications;
 
-final class NotificationsInitial extends NotificationsState {}
+  const NotificationsState({
+    this.getStatus = LoadingStatus.pure,
+    this.notifications = const [],
+  });
+
+  NotificationsState copyWith({
+    LoadingStatus? getStatus,
+    List<NotificationModel>? notifications,
+  }) {
+    return NotificationsState(
+      getStatus: getStatus ?? this.getStatus,
+      notifications: notifications ?? this.notifications,
+    );
+  }
+
+  @override
+  List<Object> get props => [getStatus, notifications];
+}

@@ -85,7 +85,9 @@ class OrderItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.r),
             ),
             child: Text(
-              order.isDelivered ? AppLocalization.current.delivered : AppLocalization.current.beingFormed,
+              order.isDelivered
+                  ? AppLocalization.current.delivered
+                  : AppLocalization.current.beingFormed,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.deepBlue,
                   ),
@@ -125,8 +127,25 @@ class OrderItem extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-              '${order.images}',
+            ...order.images.map(
+              (image) {
+                return Container(
+                  height: 150.h,
+                  clipBehavior: Clip.hardEdge,
+                  margin: EdgeInsets.symmetric(vertical: 8.h),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                  child: Align(
+                    child: Image.network(
+                      image,
+                      width: double.maxFinite,
+                      height: 150.h,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ],

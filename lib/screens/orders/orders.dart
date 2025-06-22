@@ -21,7 +21,8 @@ class OrdersPage extends StatefulWidget {
   State<OrdersPage> createState() => _OrdersPageState();
 }
 
-class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateMixin {
+class _OrdersPageState extends State<OrdersPage>
+    with SingleTickerProviderStateMixin {
   late final TabController controller;
 
   @override
@@ -95,7 +96,8 @@ class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateM
             case LoadingStatus.loading:
               return Center(child: Text('Cargo is loading'));
             case LoadingStatus.loadSuccess:
-              if (state.activeCargo == null) return Center(child: Text('No cargo selected'));
+              if (state.activeCargo == null)
+                return Center(child: Text('No cargo selected'));
               return IndexedStack(
                 index: controller.index,
                 children: [
@@ -112,7 +114,10 @@ class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateM
                             child: Text(
                               cargo.description,
                               textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge
+                                  ?.copyWith(
                                     color: AppColors.blackish,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w600,
@@ -133,7 +138,10 @@ class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateM
                               children: [
                                 Text(
                                   AppLocalization.of(context).orders,
-                                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayLarge
+                                      ?.copyWith(
                                         color: AppColors.blackish,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
@@ -146,10 +154,14 @@ class _OrdersPageState extends State<OrdersPage> with SingleTickerProviderStateM
                                     color: AppColors.blackish,
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 6.w, vertical: 2.h),
                                     child: Text(
                                       'x${cargo.orders.length}',
-                                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayLarge
+                                          ?.copyWith(
                                             color: Colors.white,
                                             fontSize: 12,
                                             fontWeight: FontWeight.w500,
@@ -231,18 +243,23 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
                   children: [
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
-                      onTap: () => setState(() => showBottomSheet = !showBottomSheet),
+                      onTap: () {
+                        setState(() => showBottomSheet = !showBottomSheet);
+                      },
                       child: Container(
                         width: 54.w,
                         height: 5.h,
-                        margin: EdgeInsets.only(bottom: 8.h, left: 30.w, right: 30.w, top: 16.h),
+                        margin: EdgeInsets.only(
+                            bottom: 8.h, left: 30.w, right: 30.w, top: 16.h),
                         decoration: BoxDecoration(
                           color: Color(0XFFD1D5DB),
                           borderRadius: BorderRadius.circular(16.r),
                         ),
                       ),
                     ),
-                    if (state.getStatus.isLoadSuccess && showBottomSheet && state.activeCargo != null) ...{
+                    if (state.getStatus.isLoadSuccess &&
+                        showBottomSheet &&
+                        state.activeCargo != null) ...{
                       Text(
                         state.activeCargo!.description,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -252,7 +269,8 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
                             ),
                       ),
                       SizedBox(height: 16.h),
-                      if (getProperOrder(state.activeCargo!.orders) case OrderModel order) ...[
+                      if (getProperOrder(state.activeCargo!.orders)
+                          case OrderModel order) ...[
                         OrderItem(
                           order: order,
                           isLastItem: true,
@@ -262,7 +280,8 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
                           WButton(
                             loading: state.orderStatus.isLoading,
                             onTap: () async {
-                              final position = await Geolocator.getCurrentPosition();
+                              final position =
+                                  await Geolocator.getCurrentPosition();
 
                               context.read<OrderBloc>().add(OrderAcceptEvent(
                                     cargoId: state.activeCargo!.cargoId,
@@ -276,12 +295,14 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
                           WButton(
                             loading: state.orderStatus.isLoading,
                             onTap: () async {
-                              final image = await Navigator.of(context).pushNamed(RouteNames.photo) as XFile?;
+                              final images = await Navigator.of(context)
+                                      .pushNamed(RouteNames.savedImages)
+                                  as List<XFile>?;
 
-                              if (image == null) return;
+                              if (images == null) return;
 
                               context.read<OrderBloc>().add(OrderEndEvent(
-                                    image: image,
+                                    images: images,
                                     cargoId: state.activeCargo!.cargoId,
                                     orderId: order.orderId,
                                     rowId: order.rowId,
@@ -308,6 +329,7 @@ class _OrderBottomSheetState extends State<OrderBottomSheet> {
     for (final order in orders) {
       if (!order.isDelivered) {
         selectedOrder = order;
+
         break;
       }
     }

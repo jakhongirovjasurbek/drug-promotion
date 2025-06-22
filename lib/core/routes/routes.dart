@@ -8,6 +8,7 @@ import 'package:drugpromotion/screens/login/login.dart';
 import 'package:drugpromotion/screens/main/main.dart';
 import 'package:drugpromotion/screens/notifications/notifications.dart';
 import 'package:drugpromotion/screens/orders/pages/camera_view.dart';
+import 'package:drugpromotion/screens/orders/pages/saved_images.dart';
 import 'package:drugpromotion/screens/profile/pages/email.dart';
 import 'package:drugpromotion/screens/profile/pages/languages.dart';
 import 'package:drugpromotion/screens/profile/pages/order_history.dart';
@@ -87,6 +88,12 @@ abstract final class AppRoutes {
       case RouteNames.photo:
         return fade<XFile>(
           page: CameraView(),
+          name: settings.name!,
+        );
+
+      case RouteNames.savedImages:
+        return fade<List<XFile>>(
+          page: SavedImagesPage(),
           name: settings.name!,
         );
 

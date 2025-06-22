@@ -25,7 +25,8 @@ class _CameraViewState extends State<CameraView> {
   @override
   void initState() {
     availableCameras().then((cameras) {
-      setState(() => cameraController = CameraController(cameras[0], ResolutionPreset.max));
+      setState(() => cameraController =
+          CameraController(cameras[0], ResolutionPreset.max));
     });
     super.initState();
   }
@@ -38,8 +39,11 @@ class _CameraViewState extends State<CameraView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Builder(builder: (context) {
-        if (cameraController == null) return Center(child: CupertinoActivityIndicator());
+        if (cameraController == null) {
+          return Center(child: CupertinoActivityIndicator());
+        }
 
         return FutureBuilder(
           future: cameraController!.initialize(),
@@ -52,19 +56,14 @@ class _CameraViewState extends State<CameraView> {
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 250),
                       child: switch (picture != null) {
-                        (true) => SizedBox.expand(child: Image.file(File(picture!.path), fit: BoxFit.cover)),
-                        (false) => LayoutBuilder(
-                            builder: (context, constraints) {
-                              final size = constraints.biggest;
-                              final deviceRatio = size.width / size.height;
-
-                              return Transform.scale(
-                                scale: cameraController!.value.aspectRatio / deviceRatio,
-                                child: Center(
-                                  child: CameraPreview(cameraController!),
-                                ),
-                              );
-                            },
+                        (true) => SizedBox.expand(
+                            child: Image.file(
+                              File(picture!.path),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        (false) => Center(
+                            child: CameraPreview(cameraController!),
                           ),
                       },
                     ),
@@ -90,13 +89,16 @@ class _CameraViewState extends State<CameraView> {
                                   onTap: Navigator.of(context).pop,
                                   child: Icon(
                                     Icons.arrow_back_ios,
-                                    color: AppColors.blackish,
+                                    color: AppColors.whitish,
                                     size: 20.w,
                                   ),
                                 ),
                                 Text(
                                   'Photo',
-                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
                                         color: Colors.white,
                                         fontSize: 21,
                                         fontWeight: FontWeight.w400,
@@ -116,7 +118,8 @@ class _CameraViewState extends State<CameraView> {
                         child: WScale(
                           onTap: () async {
                             try {
-                              final snapshot = await cameraController!.takePicture();
+                              final snapshot =
+                                  await cameraController!.takePicture();
 
                               setState(() => picture = snapshot);
                             } catch (error) {
@@ -164,7 +167,10 @@ class _CameraViewState extends State<CameraView> {
                                     },
                                     child: Text(
                                       AppLocalization.of(context).retake,
-                                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .copyWith(
                                             color: AppColors.blackish,
                                             fontSize: 17,
                                             fontWeight: FontWeight.w500,
@@ -177,7 +183,8 @@ class _CameraViewState extends State<CameraView> {
                                 child: WButton(
                                   height: 44.h,
                                   width: 165.w,
-                                  onTap: () => Navigator.of(context).pop(picture),
+                                  onTap: () =>
+                                      Navigator.of(context).pop(picture),
                                   text: AppLocalization.of(context).send,
                                 ),
                               ),
@@ -226,16 +233,22 @@ class CornerBorderPainter extends CustomPainter {
     canvas.drawLine(Offset(0, 0), Offset(0, borderLength), paint);
 
     // Top-right
-    canvas.drawLine(Offset(size.width, 0), Offset(size.width - borderLength, 0), paint);
-    canvas.drawLine(Offset(size.width, 0), Offset(size.width, borderLength), paint);
+    canvas.drawLine(
+        Offset(size.width, 0), Offset(size.width - borderLength, 0), paint);
+    canvas.drawLine(
+        Offset(size.width, 0), Offset(size.width, borderLength), paint);
 
     // Bottom-left
-    canvas.drawLine(Offset(0, size.height), Offset(borderLength, size.height), paint);
-    canvas.drawLine(Offset(0, size.height), Offset(0, size.height - borderLength), paint);
+    canvas.drawLine(
+        Offset(0, size.height), Offset(borderLength, size.height), paint);
+    canvas.drawLine(
+        Offset(0, size.height), Offset(0, size.height - borderLength), paint);
 
     // Bottom-right
-    canvas.drawLine(Offset(size.width, size.height), Offset(size.width - borderLength, size.height), paint);
-    canvas.drawLine(Offset(size.width, size.height), Offset(size.width, size.height - borderLength), paint);
+    canvas.drawLine(Offset(size.width, size.height),
+        Offset(size.width - borderLength, size.height), paint);
+    canvas.drawLine(Offset(size.width, size.height),
+        Offset(size.width, size.height - borderLength), paint);
   }
 
   @override
