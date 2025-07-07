@@ -1,9 +1,9 @@
-// lib/localization/app_locale_notifier.dart
-import 'package:flutter/material.dart';
+import 'package:drugpromotion/core/helpers/storage_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
 
 class AppLocaleNotifier extends ChangeNotifier {
-  String _locale = Intl().locale;
+  String _locale = StorageRepository.getString('locale', defValue: 'ru');
 
   String get locale => _locale;
 
@@ -12,9 +12,10 @@ class AppLocaleNotifier extends ChangeNotifier {
 
     _locale = newLocale;
 
-    // Update the global Intl locale too
+    StorageRepository.putString('locale', newLocale);
+
     Intl.defaultLocale = newLocale;
 
-    notifyListeners(); // Triggers rebuild of MaterialApp
+    notifyListeners();
   }
 }

@@ -55,7 +55,7 @@ class _OrdersPageState extends State<OrdersPage>
               Navigator.of(context).pushNamed(RouteNames.notifications);
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.w),
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Icon(
                 Icons.notifications_none_outlined,
                 size: 24.w,
@@ -63,6 +63,20 @@ class _OrdersPageState extends State<OrdersPage>
               ),
             ),
           ),
+          WScale(
+            onTap: () {
+              context.read<OrderBloc>().add(OrderGetCargoEvent());
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: Icon(
+                Icons.refresh,
+                size: 24.w,
+                color: AppColors.deepBlue,
+              ),
+            ),
+          ),
+          SizedBox(width: 10.w),
         ],
         bottom: TabBar(
           controller: controller,
@@ -96,8 +110,9 @@ class _OrdersPageState extends State<OrdersPage>
             case LoadingStatus.loading:
               return Center(child: Text('Cargo is loading'));
             case LoadingStatus.loadSuccess:
-              if (state.activeCargo == null)
+              if (state.activeCargo == null) {
                 return Center(child: Text('No cargo selected'));
+              }
               return IndexedStack(
                 index: controller.index,
                 children: [

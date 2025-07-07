@@ -118,8 +118,7 @@ class _DrugPromotionAppState extends State<DrugPromotionApp> {
                 return MaterialApp(
                   theme: ThemeData(
                     scaffoldBackgroundColor: Colors.white,
-                    appBarTheme:
-                        const AppBarTheme(backgroundColor: Color(0xFFDAE2E2)),
+                    appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFDAE2E2)),
                   ),
                   debugShowCheckedModeBanner: false,
                   themeAnimationCurve: Curves.slowMiddle,

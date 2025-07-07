@@ -42,8 +42,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           longitude: driverPosition.longitude,
         );
 
-        final order = state.activeCargo!.orders.firstWhere(
-            (order) => order.orderId == state.orderDetails!.orderId);
+        final order = state.activeCargo!.orders
+            .firstWhere((order) => order.orderId == state.orderDetails!.orderId);
 
         final response = await YandexDriving.requestRoutes(
           points: [
@@ -98,12 +98,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         }
       }
 
-      final driverLocation = Point(
-          latitude: driverPosition.latitude,
-          longitude: driverPosition.longitude);
+      final driverLocation =
+          Point(latitude: driverPosition.latitude, longitude: driverPosition.longitude);
 
-      final sortedOrders =
-          _sortOrdersByProximity(driverLocation, state.activeCargo!.orders);
+      final sortedOrders = _sortOrdersByProximity(driverLocation, state.activeCargo!.orders);
 
       final routePoints = _createRoutePoints(driverLocation, sortedOrders);
 
@@ -149,8 +147,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<OrderGetCargoEvent>((event, emit) async {
       emit(state.copyWith(getStatus: LoadingStatus.loading));
 
-      final response = await repository
-          .getCargoList(OrderArgs(status: CargoStatus.onTheWay));
+      final response = await repository.getCargoList(OrderArgs(status: CargoStatus.onTheWay));
 
       response.either(
         (failure) {
@@ -189,8 +186,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         longitude: driverPosition.longitude,
       );
 
-      final sortedOrders =
-          _sortOrdersByProximity(driverLocation, state.activeCargo!.orders);
+      final sortedOrders = _sortOrdersByProximity(driverLocation, state.activeCargo!.orders);
 
       final newMapObjects = <MapObject>[];
 
@@ -256,8 +252,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         longitude: driverPosition.longitude,
       );
 
-      final order = state.activeCargo!.orders
-          .firstWhere((order) => order.orderId == event.orderId);
+      final order = state.activeCargo!.orders.firstWhere((order) => order.orderId == event.orderId);
 
       final response = await YandexDriving.requestRoutes(
         points: [
@@ -359,15 +354,11 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         },
         (_) {
           add(_OrderCompleteEvent(
-              rowId: event.rowId,
-              orderId: event.orderId,
-              cargoId: event.cargoId));
+            rowId: event.rowId,
+            orderId: event.orderId,
+            cargoId: event.cargoId,
+          ));
         },
-      );
-
-      response.either(
-        (failure) {},
-        (data) {},
       );
     });
 
@@ -398,6 +389,8 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             return order;
           }).toList();
 
+          final actualOrders = orders?.where((order) => !order.isDelivered).toList();
+
           emit(state.copyWith(
             orderStatus: LoadingStatus.loadSuccess,
             orderDetails: OrderDetails(
@@ -407,8 +400,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
               time: 0,
               status: OrderStatus.pure,
             ),
-            activeCargo: state.activeCargo?.copyWith(orders: orders),
+            activeCargo: state.activeCargo?.copyWith(orders: actualOrders),
           ));
+
+          add(OrderCreateMapObjectsEvent());
         },
       );
     });
@@ -423,8 +418,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      if (permission != LocationPermission.whileInUse &&
-          permission != LocationPermission.always) {
+      if (permission != LocationPermission.whileInUse && permission != LocationPermission.always) {
         throw Exception('Location permission denied');
       }
     }
@@ -432,8 +426,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     return await Geolocator.getCurrentPosition();
   }
 
-  List<OrderModel> _sortOrdersByProximity(
-      Point driverLocation, List<OrderModel> orders) {
+  List<OrderModel> _sortOrdersByProximity(Point driverLocation, List<OrderModel> orders) {
     final visited = <OrderModel>[];
     var remaining = List<OrderModel>.from(orders);
     var currentPoint = driverLocation;
@@ -478,8 +471,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     return dx * dx + dy * dy;
   }
 
-  List<RequestPoint> _createRoutePoints(
-      Point driverLocation, List<OrderModel> sortedOrders) {
+  List<RequestPoint> _createRoutePoints(Point driverLocation, List<OrderModel> sortedOrders) {
     final points = <RequestPoint>[
       RequestPoint(
         point: driverLocation,

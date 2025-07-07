@@ -186,7 +186,8 @@ class _YandexMapScreenState extends State<YandexMapScreen> {
                           target: userLocation,
                           zoom: 25, // higher zoom for better 3D
                           azimuth: 0, // 0 for north up, or set based on direction
-                          tilt: 60, // 🎯 this creates the 3D angled view, // Adjust the zoom level as needed
+                          tilt:
+                              60, // 🎯 this creates the 3D angled view, // Adjust the zoom level as needed
                         ),
                       ),
                     );
